@@ -1,10 +1,8 @@
 <?php 
-include"dbConnect.php";
-        $conn = mysqli_connect($serverName, $username, $password, $dbName);
-
-
-        $sql = "SELECT * FROM `games`";
-    	$query = mysqli_query($conn ,$sql);
+	include"dbConnect.php";
+    $conn = mysqli_connect($serverName, $username, $password, $dbName);
+    $sql = "SELECT * FROM `games`";
+    $query = mysqli_query($conn ,$sql);
 
 ?>
 
@@ -35,18 +33,17 @@ include"dbConnect.php";
     	<thead>
            	<th scope='col'>#</th>
         	<th scope='col'>Spelnaam</th>
-        	<th scope='col'>Expansions</th>
         	<th scope='col'>Skills</th>
         	<th scope='col'>min speler</th>
         	<th scope='col'>max spelers</th>
         	<th scope='col'>Speel tijd</th>
         	<th scope='col'>Uitleg tijd</th>
+        	<th></th>
         </thead>
     <?php while($row = $query->fetch_assoc()){ ?>
 	        	<tr>
 	            	<td><?php echo $row[id] ?></td>
 	            	<td><?php echo $row[name] ?></td>
-	            	<td><?php echo $row[expansions] ?></td>
 	            	<td><?php echo $row[skills] ?></td>
 	            	<td><?php echo $row[min_players] ?></td>
 	            	<td><?php echo $row[max_players] ?></td>
@@ -54,7 +51,7 @@ include"dbConnect.php";
 	            	<td><?php echo $row[explain_minutes] ?></td>
 	            	<td>
 	            		<?php 
-	            			 echo '<a class="btn btn-success"  href="index.php?id='.$row[id].'"><i class="text-light fas fa-plus"></i></a>'
+	            			 echo '<a class="btn btn-success"  href="move.php?id='.$row[id].'" ><i class="text-light fas fa-plus"></i></a>';
 	            		?>
 	            	</td>
 	        	</tr>
