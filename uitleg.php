@@ -1,9 +1,15 @@
 <?php 
-	include"dbConnect.php";
+	include"Database/dbConnect.php";
 	$conn = mysqli_connect($serverName, $username, $password, $dbName);
 	$id = $_GET[id];
-	$sql="SELECT * FROM `activeGames` WHERE id = $id";
-	$query=mysqli_query($conn, $sql);
+	$game_id = $_GET[game_id];
+	
+	$sql="SELECT * FROM `games` WHERE id = '$id'";
+	$query = mysqli_query($conn, $sql);
+
+	$sql2 = "SELECT * FROM `activeGames` WHERE game_id = '$game_id'";
+	$query2 = mysqli_query($conn, $sql2);
+
 
 	while($row = $query->fetch_object()){
 ?>
@@ -74,10 +80,29 @@
 					</aside>
 				</div>
 		</div>
-
+		<?php while($row2 = $query2->fetch_object()){ ?>
+		<aside>
+			<table class="table w-50">
+				<tbody>
+					<tr>
+						<th>Uitlegger</th>
+						<td><?php echo $row2->uitlegger ?></td>
+					</tr>
+					<tr>
+						<th>Starttijd</th>
+						<td><?php echo $row2->begin_time ?></td>
+					</tr>
+					<tr>
+						<th>Spelers</th>
+						<td><?php echo $row2->players ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</aside>
+		<?php } ?>
 		
 	</div>
 </body>
 </html>
 
-<?php } ?>
+<?php }?>

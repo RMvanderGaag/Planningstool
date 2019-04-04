@@ -1,11 +1,11 @@
 <?php  
-	include"dbConnect.php";
-	$name = $_GET['name'];
+	include"Database/dbConnect.php";
+	$id = $_GET[game_id];
+	session_start();
+	$sessionId = $_SESSION[id];
 	$conn = mysqli_connect($serverName, $username, $password, $dbName);
-    $sql = "SELECT * FROM `games`WHERE name = $name";
+    $sql = "SELECT * FROM `games` WHERE id = $sessionId";
     $query = mysqli_query($conn ,$sql);
-   
-
 ?>
 
 <!DOCTYPE html>
@@ -28,23 +28,22 @@
 		</ul>	
 	</nav>
 	<div class="container">
-		<form action="send.php?id=<?php echo $id?>" method="post">
+		<form action="sendThrough/send.php?id=<?php echo $id?>" method="post">
 			<div class="form-group mt-4">
 				<label>Voeg iemand toe die het spel gaat uitleggen</label>
-				<input name="Uitlegger" class="form-control w-50" type="text" pattern="[^' ']+">
+				<input name="Uitlegger" class="form-control w-50" type="text" pattern="[^' ']+" required>
 			</div>
 			<div class="form-group mt-5">
 				<label>Voeg de namen van de spelers toe</label>
 				<?php 
-				if($query){
 					while($info = $query->fetch_assoc()){
 						for($i = 1; $i <= $info[max_players] ; $i++){ ?>
-						<input name="players" class="form-control w-50 mb-2" type="text" pattern="[^' ']+">
-				<?php } } }?>
+							<input name="players<?php echo $i ?>" class="form-control w-50 mb-2" type="text" pattern="[^' ']+">
+				<?php } } ?>
 			</div>
 			<div class="form-group mt-3">
 				<label>Voeg de starttijd toe</label>
-				<input class="form-control w-25" type="time" name="time">
+				<input class="form-control w-25" type="time" name="time" required>
 			</div>
 
 			<input class="btn btn-success mt-1" type="submit" name="submit">
