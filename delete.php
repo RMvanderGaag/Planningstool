@@ -6,3 +6,5 @@
 	$query = mysqli_query($conn ,$sql);
 
 	header("Location: index.php");
+
+	

@@ -1,8 +1,20 @@
 <?php  
 	include "dbConnect.php";
-	$id = $_GET[id];
+	$name = $_GET[name];
 	$conn = mysqli_connect($serverName, $username, $password, $dbName);
-  	$sql = "INSERT INTO `activeGames` SELECT * FROM `games` WHERE id = $id";
-    $query = mysqli_query($conn ,$sql);
 
-   	header("Location: index.php");
+   	$sql = "SELECT name, play_minutes, explain_minutes FROM `games` WHERE name = '$name'";
+   	$query = mysqli_query($conn, $sql);
+   	while ($row = mysqli_fetch_object($query)) {
+	   	$name =	$row->name;
+	   	$play_minutes = $row->play_minutes;
+	   	$explain_minutes = $row->explain_minutes;
+   	}
+
+   	$sql2 = "INSERT INTO `activeGames` (name, play_minutes, explain_minutes) VALUES ('$name', '$play_minutes', '$explain_minutes')";
+   	$query2 = mysqli_query($conn, $sql2);
+
+
+
+
+   	header("Location: edit.php?name=$name");

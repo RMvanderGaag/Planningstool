@@ -18,15 +18,15 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-info">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-				    <a href="index.php" class="nav-link text-light active">Mijn spellen</a>
-				</li>
-				<li class="nav-item">
-					<a href="addGame.php" class="nav-link text-light">Spellen toevoegen</a>
-				</li>
-			</ul>	
-		</nav>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a href="index.php" class="nav-link text-light active">Mijn spellen</a>
+			</li>
+			<li class="nav-item">
+				<a href="addGame.php" class="nav-link text-light">Spellen toevoegen</a>
+			</li>
+		</ul>	
+	</nav>
 
 	<?php if ($query-> num_rows > 0) {?>
 	<table class='table'>
@@ -34,7 +34,7 @@
            	<th scope='col'>#</th>
         	<th scope='col'>Spelnaam</th>
         	<th scope='col'>Skills</th>
-        	<th scope='col'>min speler</th>
+        	<th scope='col'>min spelers</th>
         	<th scope='col'>max spelers</th>
         	<th scope='col'>Speel tijd</th>
         	<th scope='col'>Uitleg tijd</th>
@@ -51,7 +51,7 @@
 	            	<td><?php echo $row[explain_minutes] ?></td>
 	            	<td>
 	            		<?php 
-	            			 echo '<a class="btn btn-success"  href="move.php?id='.$row[id].'" ><i class="text-light fas fa-plus"></i></a>';
+	            			 echo '<a class="btn btn-success"  href="move.php?name='.$row[name].'" ><i class="text-light fas fa-plus"></i></a>';
 	            		?>
 	            	</td>
 	        	</tr>
