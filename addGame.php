@@ -1,16 +1,17 @@
 <?php 
-	include"Database/dbConnect.php";
-    $conn = mysqli_connect($serverName, $username, $password, $dbName);
+    include"dbConnect.php";
+
     $sql = "SELECT * FROM `games`";
-    $query = mysqli_query($conn ,$sql);
+    $query = $conn->prepare($sql);
+    $query->execute();
 
+    $result = $query->fetchAll();
 ?>
-
 
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8">
-	<title>Spel toevoegen</title>
+	<title>Planningstool | GAME TOEVOEGEN</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -18,18 +19,16 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-info">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-				    <a href="index.php" class="nav-link text-light active">Mijn spellen</a>
-				</li>
-				<li class="nav-item">
-					<a href="addGame.php" class="nav-link text-light">Spellen toevoegen</a>
-				</li>
-			</ul>	
-		</nav>
-
-	<?php if ($query-> num_rows > 0) {?>
-	<table class='table'>
+		<ul class="navbar-nav">
+			<li class="nav-item mr-2">
+				<a href="index.php" class="nav-link text-light active">Mijn spellen</a>
+			</li>
+			<li class="nav-item">
+				<a href="addGame.php" class="nav-link text-light">Spellen toevoegen</a>
+			</li>
+		</ul>	
+	</nav>
+	<table class='table table-striped'>
     	<thead>
            	<th scope='col'>#</th>
         	<th scope='col'>Spelnaam</th>
@@ -40,7 +39,7 @@
         	<th scope='col'>Uitleg tijd</th>
         	<th></th>
         </thead>
-    <?php while($row = $query->fetch_assoc()){ ?>
+    <?php foreach ($result as $row){ ?>
 	        	<tr>
 	            	<td><?php echo $row[id] ?></td>
 	            	<td><?php echo $row[name] ?></td>
@@ -51,15 +50,13 @@
 	            	<td><?php echo $row[explain_minutes] ?></td>
 	            	<td>
 	            		<?php 
-	            			 echo '<a class="btn btn-success"  href="sendThrough/move.php?id='.$row[id].'" ><i class="text-light fas fa-plus"></i></a>';
+	            			 echo '<a class="btn btn-success"  href="move.php?id='.$row[id].'&max_players='.$row[max_players].'" ><i class="text-light fas fa-plus"></i></a>';
 	            		?>
 	            	</td>
 	        	</tr>
     <?php } ?>
 </table>
-	<?php }else{
-    		echo "geen resultaat";
-
-    	} ?>
 </body>
 </html>
+<?php $conn = null ?>
+
