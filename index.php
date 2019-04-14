@@ -1,5 +1,5 @@
 <?php 
-    include"dbConnect.php";
+    include"stuff/dbConnect.php";
 
     $sql = "SELECT * FROM `activeGames` ORDER BY begin_time";
     $query = $conn->prepare($sql);
@@ -46,7 +46,7 @@
 	            	<td><?php echo $row[play_minutes] ?></td>
 	            	<td><?php echo $row[explain_minutes] ?></td>
                     <td><a href='editUpdate.php?game_id=<? echo $row[game_id]?>' class='btn btn-warning'><i class='text-light fas fa-edit'></i></a></td>
-					<td><a href='delete.php?game_id=<?=$row[game_id]?>' class='btn btn-danger' onclick="return isValid();"><i class='text-light fas fa-trash-alt'></i></a></td>
+					<td><a href='stuff/delete.php?game_id=<?=$row[game_id]?>' class='btn btn-danger' onclick="return isValid();"><i class='text-light fas fa-trash-alt'></i></a></td>
 	        	</tr>
     <?php } ?>
 </table>

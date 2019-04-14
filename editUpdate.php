@@ -1,5 +1,5 @@
 <?php 
-    include"dbConnect.php";
+    include"stuff/dbConnect.php";
 	$max_players = $_GET[max_players];
     $id = $_GET[game_id];
 	session_start();
@@ -34,7 +34,7 @@
 		</ul>	
 	</nav>
 	<div class="container">
-		<form action="send.php?id=<?php echo $id?>" method="post">
+		<form action="stuff/send.php?id=<?php echo $id?>" method="post">
 			<div class="form-group mt-4">
 				<label>Voeg iemand toe die het spel gaat uitleggen</label>
 				<input name="Uitlegger" class="form-control w-50" type="text" pattern="[^' ']+" required value="<?php echo  $result['uitlegger'];?>">

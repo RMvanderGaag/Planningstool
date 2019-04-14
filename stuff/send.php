@@ -13,4 +13,4 @@ $query->bindParam(":id", $id);
 $query->execute();
 
 
-header("location: index.php");
+header("location: ../index.php");

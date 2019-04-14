@@ -25,5 +25,5 @@
 
     $game_id = $conn->lastInsertId();
     echo $game_id;
-    header("location: edit.php?game_id=$game_id&max_players=$max_players");
+    header("location: ../edit.php?game_id=$game_id&max_players=$max_players");
 ?>

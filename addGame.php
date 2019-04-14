@@ -1,5 +1,5 @@
 <?php 
-    include"dbConnect.php";
+    include"stuff/dbConnect.php";
 
     $sql = "SELECT * FROM `games`";
     $query = $conn->prepare($sql);
@@ -50,7 +50,7 @@
 	            	<td><?php echo $row[explain_minutes] ?></td>
 	            	<td>
 	            		<?php 
-	            			 echo '<a class="btn btn-success"  href="move.php?id='.$row[id].'&max_players='.$row[max_players].'" ><i class="text-light fas fa-plus"></i></a>';
+	            			 echo '<a class="btn btn-success"  href="stuff/move.php?id='.$row[id].'&max_players='.$row[max_players].'" ><i class="text-light fas fa-plus"></i></a>';
 	            		?>
 	            	</td>
 	        	</tr>

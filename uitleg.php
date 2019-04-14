@@ -1,5 +1,5 @@
 <?php 
-	include"dbConnect.php";
+	include"stuff/dbConnect.php";
 
 	$id = $_GET[id];
     $sql = "SELECT * FROM games WHERE id = :id ";
